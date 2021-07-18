@@ -4,7 +4,5 @@ services:
     build: .
     image: back-end
     command: python app.py
-    links:
-      - db
     ports:
       - "5000:5000"
