@@ -1,7 +1,18 @@
 version: "3.9"
 services:
-  server:
+  api:
     build: .
+    image: back-end
     command: python app.py
+    links:
+      - db
     ports:
       - "5000:5000"
+  db:
+    image: mysql:5.7
+    ports:
+      - "32000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
