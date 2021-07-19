@@ -1,5 +1,6 @@
 from flask import request
 from flask_restx import Api, Resource, fields, reqparse
+from flask_restx.namespace import Namespace
 from models import Customer
 from utils.http import unprocessable_entity
 
@@ -9,6 +10,8 @@ api = Api(
     description="A back-end coding challenge by Zachary Mauldin for HEB",
     doc="/swagger",
     contact_email="zmsoftwareengineer@gmail.com",
+    default="Customer",
+    default_label="Customers endpoints",
 )
 
 resource_fields = api.model(
@@ -25,8 +28,10 @@ resource_fields = api.model(
 )
 
 
-@api.route("/customers")
+@api.route("/customers", endpoint="customers")
 class CustomersView(Resource):
+    """Customer"""
+
     parser = reqparse.RequestParser()
     parser.add_argument("city")
 
